@@ -18,6 +18,7 @@ from Ubot import CMD_HELP, app
 from Ubotlibs.Ubot.helper.data import Data
 from Ubotlibs.Ubot.helper.inline import cb_wrapper, paginate_help
 from Ubot import ids as users
+from config import SUPPORT, CHANNEL, CMD_HNDLR, ADMIN1_ID
 
 @Client.on_callback_query()
 async def _callbacks(_, callback_query: CallbackQuery):
@@ -62,6 +63,25 @@ async def _callbacks(_, callback_query: CallbackQuery):
         except Exception as e:
             e = traceback.format_exc()
             print(e, "Callbacks")
+
+
+@app.on_callback_query(filters.regex("start_admin"))
+async def start_admin(_, query: CallbackQuery):
+    ADMIN1 = ADMIN1_ID[0]
+    ADMIN2 = ADMIN2_ID[0]
+    return await query.edit_message_text(
+        f"""<b> ☺️** Silakan hubungi admin dibawah ini jika menemukan kendala.**</b>""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(text="👮‍♂ Admin 1", user_id=ADMIN1),
+                ],
+                  [
+                     InlineKeyboardButton(text="Tutup", callback_data="cl_ad"),
+                  ],
+             ]
+        ),
+    )
 
 
 @app.on_callback_query(filters.regex("ub_modul_(.*)"))
