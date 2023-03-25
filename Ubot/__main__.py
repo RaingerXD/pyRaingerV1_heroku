@@ -5,15 +5,15 @@ import asyncio
 from asyncio import get_event_loop_policy
 from pyrogram import idle
 from uvloop import install
-from ubotlibs import *
-from ubot import BOTLOG_CHATID, aiosession, bots, app, ids, LOOP
+from Ubotlibs import *
+from Ubot import BOTLOG_CHATID, aiosession, bots, app, ids, LOOP
 from platform import python_version as py
-from ubot.logging import LOGGER
+from Ubot.logging import LOGGER
 from pyrogram import __version__ as pyro
-from ubot.modules import ALL_MODULES
-from ubotlibs import *
-from ubotlibs.Ubot.database.activedb import *
-from ubotlibs.Ubot.database.usersdb import *
+from Ubot.modules import ALL_MODULES
+from Ubotlibs import *
+from Ubotlibs.Ubot.database.activedb import *
+from Ubotlibs.Ubot.database.usersdb import *
 from config import SUPPORT, CHANNEL, CMD_HNDLR, ADMIN1_ID
 import os
 from dotenv import load_dotenv
