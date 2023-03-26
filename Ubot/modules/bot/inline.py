@@ -73,7 +73,7 @@ async def get_readable_time(seconds: int) -> str:
     
 @app.on_callback_query(filters.regex("start_admin"))
 async def start_admin(_, query: CallbackQuery):
-    ADMIN1 = ADMIN1_ID[0]
+    ADMIN1 = ADMIN1_ID[5615921474]
 #    ADMIN2 = ADMIN2_ID[0]
 #    ADMIN3 = ADMIN3_ID[0]
 #    ADMIN4 = ADMIN4_ID[0]
