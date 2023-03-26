@@ -85,7 +85,7 @@ def inline_wrapper(func):
                         InlineQueryResultArticle(
                             title="bikin sendiri ya, di @pyraingerbot",
                             input_message_content=InputTextMessageContent(
-                                "You cannot access this Bot"
+                                "Buat User pyRainger"
                             ),
                         )
                     )
