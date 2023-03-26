@@ -4,8 +4,8 @@ import os
 import sys
 from os import environ, execle, path, remove
 from Ubot.modules.basic.help import add_command_help
-from ubotlibs import BOT_VER
-from ubotlibs.ubot import Ubot, Devs
+from Ubotlibs import BOT_VER
+from Ubotlibs.ubot import Ubot, Devs
 add_command_help = add_command_help
 
 ADMINS = [5615921474]
