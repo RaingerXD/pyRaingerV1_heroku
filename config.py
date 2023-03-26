@@ -7,19 +7,15 @@ TIME_SLEEP = int(getenv("TIME_SLEEP", "86400"))
 load_dotenv(".env")
 
 
-API_ID = int(getenv("API_ID", "6435225")) #optional
-API_HASH = getenv("API_HASH", "4e984ea35f854762dcde906dce426c2d") #optional
-SUDO_USERS = list(map(int, getenv("SUDO_USERS", "").split()))
-OWNER_ID = int(getenv("OWNER_ID") or 0)
-ADMIN1_ID = list(map(int, getenv("ADMIN1_ID", "951454060").split()))
-ADMIN2_ID = list(map(int, getenv("ADMIN2_ID", "902478883").split()))
-ADMIN3_ID = list(map(int, getenv("ADMIN3_ID", "2067434944").split()))
-ADMIN4_ID = list(map(int, getenv("ADMIN4_ID", "1947740506").split()))
-ADMIN5_ID = list(map(int, getenv("ADMIN5_ID", "1897354060").split()))
-MONGO_URL = getenv("MONGO_URL")
+API_ID = int(getenv("API_ID", "")) #optional
+API_HASH = getenv("API_HASH", "") #optional
+SUDO_USERS = list(map(int, getenv("SUDO_USERS", "5615921474").split()))
+OWNER_ID = int(getenv("OWNER_ID", "5615921474") or 0)
+ADMIN1_ID = list(map(int, getenv("ADMIN1_ID", "5615921474").split()))
+MONGO_URL = getenv("MONGO_URL", "mongodb+srv://pyrainger:pyrainger@pyrainger.djuurcs.mongodb.net/?retryWrites=true&w=majority")
 BOT_TOKEN = getenv("BOT_TOKEN", "")
 ALIVE_PIC = getenv("ALIVE_PIC")
-ALIVE_TEXT = getenv("ALIVE_TEXT")
+ALIVE_TEXT = getenv("ALIVE_TEXT", "pyRainger")
 PM_LOGGER = getenv("PM_LOGGER", True)
 OPENAI_API = getenv("OPENAI_API", "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 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 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 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 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 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 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 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").split()
 BOTLOG_CHATID = int(getenv("BOTLOG_CHATID") or 0)
