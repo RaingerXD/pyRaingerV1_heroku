@@ -12,7 +12,8 @@ from dotenv import load_dotenv
 from os import environ, execle, path
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
-from Ubot.core.db import *
+from Ubotlibs.Ubot.database.activedb import *
+from Ubotlibs.Ubot.database.accesdb import *
 from Ubot import *
 from itertools import count
 from Ubot.modules.basic import *
