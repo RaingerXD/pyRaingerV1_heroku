@@ -67,7 +67,7 @@ async def _callbacks(_, callback_query: CallbackQuery):
 
 @app.on_callback_query(filters.regex("start_admin"))
 async def start_admin(_, query: CallbackQuery):
-    ADMIN1 = ADMIN1_ID[5615921474]
+    ADMIN1 = ADMIN1_ID[0]
     return await query.edit_message_text(
         f"""<b> ☺️** Silakan hubungi admin dibawah ini jika menemukan kendala.**</b>""",
         reply_markup=InlineKeyboardMarkup(
