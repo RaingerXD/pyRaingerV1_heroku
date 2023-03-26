@@ -38,10 +38,10 @@ def paginate_help(page_number, loaded_modules, prefix):
         ] + [
             (
                 InlineKeyboardButton(
-                    text="≪", callback_data=f"{prefix}_prev({modulo_page})"
+                    text="«", callback_data=f"{prefix}_prev({modulo_page})"
                 ),
                 InlineKeyboardButton(
-                    text="≫", callback_data=f"{prefix}_next({modulo_page})"
+                    text="»", callback_data=f"{prefix}_next({modulo_page})"
                 ),
             )
         ]
@@ -83,7 +83,7 @@ def inline_wrapper(func):
                 results=[
                     (
                         InlineQueryResultArticle(
-                            title="bikin sendiri ya, di @pyraingerbot",
+                            title="buat di @pyraingerbot dan pm @itachipremium",
                             input_message_content=InputTextMessageContent(
                                 "Buat User pyRainger"
                             ),
