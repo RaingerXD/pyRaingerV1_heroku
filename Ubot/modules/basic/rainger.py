@@ -24,7 +24,7 @@ from Ubot.modules.bot.start import ADMINS
 from Ubotlibs.Ubot import Ubot, Devs
 
 OWNER_ID = 5615921474
-SUDO_ID = [5615921474, 1620434318]
+SUDO_ID = [5615921474]
 
 load_dotenv()
 
