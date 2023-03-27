@@ -16,7 +16,7 @@ from pyrogram.types import Message
 from Ubotlibs.Ubot import Ubot
 from Ubotlibs.Ubot.helper.PyroHelpers import ReplyCheck
 from Ubotlibs.Ubot.helper.utility import split_list
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubot import app, CMD_HELP, SUDO_USER
 from Ubot import cmds
 
