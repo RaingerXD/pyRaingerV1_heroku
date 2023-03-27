@@ -17,7 +17,7 @@ from pyrogram import Client as gez
 from Ubotlibs.Ubot.helper import edit_or_reply, get_text, ReplyCheck
 from Ubotlibs import DEVS, BL_GCAST
 from Ubot.modules.basic import add_command_help
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from config import *
 from Ubot import cmds
 
