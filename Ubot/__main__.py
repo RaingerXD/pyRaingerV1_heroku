@@ -12,8 +12,8 @@ from Ubot.logging import LOGGER
 from pyrogram import __version__ as pyro
 from Ubot.modules import ALL_MODULES
 from Ubotlibs import *
-from Ubotlibs.Ubot.database.activedb import *
-from Ubotlibs.Ubot.database.usersdb import *
+from Ubot.core.db.activedb import *
+from Ubot.core.db.usersdb import *
 from config import SUPPORT, CHANNEL, CMD_HNDLR, ADMIN1_ID
 import os
 from dotenv import load_dotenv
