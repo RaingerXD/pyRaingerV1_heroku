@@ -23,7 +23,7 @@ from Ubotlibs.Ubot.helper.basic import edit_or_reply
 from Ubotlibs.Ubot.helper.parser import mention_html, mention_markdown
 from Ubot import cmds
 from Ubot.modules.basic.profile import extract_user, extract_userid
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubot.modules.basic.help import add_command_help
 
 admins_in_chat = {}
