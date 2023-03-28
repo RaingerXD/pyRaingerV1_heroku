@@ -17,7 +17,7 @@ from Ubotlibs.Ubot import Ubot
 from Ubot.modules.basic import add_command_help
 from Ubot.modules.basic.profile import extract_user
 from Ubot import *
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 
 @Ubot("sg", cmds)
 @check_access
