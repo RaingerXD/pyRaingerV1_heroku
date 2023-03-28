@@ -101,8 +101,8 @@ async def recv_tg_tfa_message(_, message: Message):
 #        )
 #    
 #    raise message.stop_propagation()
- 
-         await asyncio.sleep(2.0)
+# 
+#         await asyncio.sleep(2.0)
         collection = cli["access"]
         await collection.users.delete_one({'user_id': int(message.chat.id)})
         try:
