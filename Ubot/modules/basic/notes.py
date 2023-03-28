@@ -4,7 +4,7 @@ from Ubotlibs.Ubot.database.notesdb import *
 from pyrogram.types import Message
 from Ubotlibs.Ubot.utils.tools import *
 from Ubot.modules.basic import add_command_help
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubot import cmds
 
 
