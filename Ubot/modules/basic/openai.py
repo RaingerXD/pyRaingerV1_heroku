@@ -10,7 +10,7 @@ from pyrogram.errors import *
 from Ubot import cmds
 from Ubot.modules.basic import add_command_help
 from Ubot.modules.basic.dev import *
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubotlibs.Ubot.helper.what import *
 
 RMBG_API_KEY = "3RCCWg8tMBfDWdAs44YMfJmC"
@@ -37,7 +37,7 @@ class OpenAi:
         
 
 # credit: Tomi Setiawan > @T0M1_X
-@Client.on_message(filters.me & filters.command(["ai", "ask"], cmds))
+@Ubot(["ai", "ask"], cmds)
 @check_access
 async def openai(c, m):
     openai_api_key = random.choice(OPENAI_API)
@@ -66,7 +66,7 @@ async def openai(c, m):
 
 
 # credit: Tomi Setiawan > @T0M1_X
-@Client.on_message(filters.me & filters.command(["img", "photo"], cmds))
+@Ubot(["img", "photo"], cmds)
 @check_access
 async def img(lient, message):
     Tm = await message.reply("<code>Memproses...</code>")
@@ -81,7 +81,7 @@ async def img(lient, message):
         await message.reply(error)
         return await Tm.delete()
         
-@Client.on_message(filters.command("rmbg", cmds) & filters.me)
+@Ubot("rmbg", cmds)
 @check_access
 async def rmbg_background(c: Client, m: Message):
     api_key = RMBG_API_KEY
