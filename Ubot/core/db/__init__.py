@@ -1,4 +1,4 @@
-from Ubot.core.db import cli
+from Ubot.core.db import *
 from config import MONGO_URL
 from Ubot.core.db.usersdb import *
 from Ubot.core.db .accesdb import *
