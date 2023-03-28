@@ -8,7 +8,8 @@ BL_GEEZ = [1245451624]
 DEVS = [5615921474]
 ADMINS = [5615921474]
 BOT_VER = "1.1.0"
-pemaen_lenong = [5615921474]
+pemaen_lenong = []
+pemaen_gendang = [5615921474]
 
 def pemaen_gendang(client, message):
     chat_id = message.chat.id
