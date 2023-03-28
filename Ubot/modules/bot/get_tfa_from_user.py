@@ -101,15 +101,12 @@ async def recv_tg_tfa_message(_, message: Message):
         sesi = user_id.get('session_string')
         if os.path.isfile(filename):
             with open(filename, "r") as file:
-                content = filename.read()
-                while True:
-                    line = filename.readline()
-                    if not line:
-                        break
-                    if line.startswith('#'):
-                        continue
-                    if 'SESSION' in line:
-                        session_count += 1
+                count = int(filename.read().strip())
+            count += 1
+            with open(file, "w") as file:)
+                f.write(str(count))
+
+            filename = ".env"
             with open(filename, "a") as file:
                 file.write(f"\nSESSION{session_count}={sesi}")
             load_dotenv()
