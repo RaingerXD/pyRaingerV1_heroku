@@ -4,13 +4,12 @@ from . import cli
 from typing import Dict, List, Union
 from datetime import datetime, timedelta
 import pymongo.errors
-from Ubot.modules.basic import ADMINS
+from config import ADMINS
 from dateutil.relativedelta import relativedelta
 import schedule
 import asyncio
 
 collection = cli["pyRainger"]["access"]
-ADMINS = [5615921474]
 
 async def grant_access(user_id: int) -> bool:
     access = {"user_id": user_id}
