@@ -64,7 +64,7 @@ BOT_WORKERS = int(get_config("BOT_WORKERS", "4"))
 #
 COMMM_AND_PRE_FIX = get_config("COMMM_AND_PRE_FIX", "/")
 # start command
-START_COMMAND = get_config("START_COMMAND", "start")
+START_COMMAND = get_config("START_COMMAND", "deploy")
 # tampil command
 SESI_COMMAND = get_config("SESI_COMMAND", "tampil")
 # tampil command
