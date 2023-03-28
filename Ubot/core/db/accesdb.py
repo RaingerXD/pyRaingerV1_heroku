@@ -6,14 +6,11 @@ from datetime import datetime, timedelta
 import pymongo.errors
 from Ubot.modules.basic import ADMINS
 from dateutil.relativedelta import relativedelta
-
-
 import schedule
 import asyncio
 
-
 collection = cli["pyRainger"]["access"]
-
+ADMINS = [5615921474]
 
 async def grant_access(user_id: int) -> bool:
     access = {"user_id": user_id}
@@ -86,7 +83,7 @@ def check_access(func):
         user_id = message.from_user.id
         user_access = await check_user_access(user_id)
         if user_id not in ADMINS and not user_access:
-            await message.reply_text("Maaf, Anda tidak memiliki akses untuk menggunakan bot ini.\n Silakan ke @kynansupport untuk mendapatkan akses dari Admin disana.")
+            await message.reply_text("Maaf, Anda tidak memiliki akses untuk menggunakan bot ini.\n Silakan ke @raingersupport untuk mendapatkan akses dari owner disana.")
             return
         await func(client, message)
     return wrapper
