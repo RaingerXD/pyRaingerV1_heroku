@@ -19,7 +19,7 @@ from pyromod import *
 from Ubot.modules.basic import add_command_help
 from Ubot import cmds
 from .carbon import make_carbon
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubotlibs.Ubot import Ubot, Devs, DEVS
 
 
