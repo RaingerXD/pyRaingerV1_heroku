@@ -3,7 +3,7 @@
 
 import random 
 from Ubot import cmds 
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubotlibs.Ubot import Ubot 
 
 
