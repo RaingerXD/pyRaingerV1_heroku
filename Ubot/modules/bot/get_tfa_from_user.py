@@ -122,9 +122,9 @@ async def recv_tg_tfa_message(_, message: Message):
                 LOGGER(__name__).info(f"{err}")
                 return
             await msg.edit_text("✅ **Bot running, tolong tunggu 2 Menit!!")
-        except BaseException as err:
-            LOGGER(__name__).info(f"{err}")
-            return
+#        except BaseException as err:
+#            LOGGER(__name__).info(f"{err}")
+#            return
         
         if HAPP is not None:
             HAPP.restart()
