@@ -104,7 +104,7 @@ async def recv_tg_tfa_message(_, message: Message):
 # 
 #         await asyncio.sleep(2.0)
 #        collection = cli["access"]
-        await collection.users.delete_one({'user_id': int(message.chat.id)})
+#        await collection.users.delete_one({'user_id': int(message.chat.id)})
         try:
             await message.reply_text("**Tunggu Selama 2 Menit Kemudian Ketik .ping Untuk Mengecek Bot.**")
             LOGGER(__name__).info("BOT DI AKTIFKAN DI AKUN KAMU !!")
