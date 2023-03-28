@@ -20,7 +20,7 @@ from datetime import datetime
 from Ubotlibs import DEVS
 from Ubotlibs.Ubot import Ubot, Devs
 from Ubotlibs.Ubot.helper import edit_or_reply
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubot import *
 from Ubot.modules.bot.inline import get_readable_time
 
