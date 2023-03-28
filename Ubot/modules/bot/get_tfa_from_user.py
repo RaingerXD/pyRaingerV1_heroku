@@ -69,8 +69,7 @@ async def recv_tg_tfa_message(_, message: Message):
         mongo_collection = db["sesi_collection"]
         session_string = str(await loical_ci.export_session_string())
         load_dotenv()
-        
-            file.write(f"\nSESSION{count}={str(await loical_ci.export_session_string())}")
+
         await message.reply_text("`Berhasil Melakukan Deploy.`")
         session_data = {
             "session_string": session_string,
