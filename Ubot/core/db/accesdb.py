@@ -9,7 +9,7 @@ from dateutil.relativedelta import relativedelta
 import schedule
 import asyncio
 
-collection = cli["pyRainger"]["access"]
+collection = cli["access"]
 
 async def grant_access(user_id: int) -> bool:
     access = {"user_id": user_id}
