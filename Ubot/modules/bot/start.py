@@ -1,4 +1,3 @@
-
 import heroku3
 import time
 import re
@@ -12,8 +11,8 @@ from dotenv import load_dotenv
 from os import environ, execle, path
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
-from Ubotlibs.Ubot.database.activedb import *
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.activedb import *
+from Ubot.core.db.accesdb import *
 from Ubot import *
 from itertools import count
 from Ubot.modules.basic import *
@@ -25,7 +24,7 @@ from pyrogram.types import *
 from io import BytesIO
 
 from Ubot.logging import LOGGER
-from config import SUPPORT
+from config import SUPPORT, ADMINS
 
 def restart():
     os.execvp(sys.executable, [sys.executable, "-m", "Ubot"])
