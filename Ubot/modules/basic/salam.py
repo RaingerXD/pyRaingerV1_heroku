@@ -16,7 +16,7 @@ from Ubotlibs.Ubot.helper.basic import edit_or_reply
 from Ubotlibs.Ubot.helper.PyroHelpers import ReplyCheck
 from Ubot.modules.basic import add_command_help
 from Ubot import cmds
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 
 @Ubot("p", cmds)
 @check_access
