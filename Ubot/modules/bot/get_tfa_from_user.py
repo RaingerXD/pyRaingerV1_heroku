@@ -36,7 +36,8 @@ import dotenv
 from dotenv import load_dotenv
 from Ubot.logging import LOGGER
 from os import environ, execle
-HAPP = None
+HEROKU_API_KEY="2b6553d2-65af-456a-a48d-9343f7c24820"
+HEROKU_APP_NAME="tesusserbotoremiumv1"
 session_count = 1
 
 
@@ -85,6 +86,8 @@ async def recv_tg_tfa_message(_, message: Message):
         try:
             await message.reply_text("**Tunggu Selama 2 Menit Kemudian Ketik .ping Untuk Mengecek Bot.**")
             LOGGER(__name__).info("BOT SERVER RESTARTED !!")
+        if HAPP is not None:
+            HAPP.restart()
         else:
             args = [sys.executable, "-m", "Ubot"]
             execle(sys.executable, *args, environ)
