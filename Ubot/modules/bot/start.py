@@ -16,7 +16,7 @@ from Ubot.core.db.accesdb import *
 from Ubot import *
 from itertools import count
 from Ubot.modules.basic import *
-from Ubotlibs.Ubot import Ubot, Devs
+from Ubotlibs.Ubot import Ubot, Devs, ADMINS
 from pyrogram import *
 from platform import python_version as py
 from pyrogram import __version__ as pyro
