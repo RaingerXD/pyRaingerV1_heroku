@@ -20,7 +20,7 @@ from pyrogram.types import Message
 from config import ALIVE_PIC, ALIVE_TEXT
 from Ubot import START_TIME, SUDO_USER, app
 from Ubot.modules.basic import add_command_help
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubot.modules.bot.inline import get_readable_time
 from Ubot import cmds
 
