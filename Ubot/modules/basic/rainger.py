@@ -19,7 +19,7 @@ from Ubotlibs.Ubot.database.usersdb import *
 from Ubotlibs.Ubot.database.accesdb import *
 from pyrogram.raw.functions import Ping
 from Ubot.modules.bot.inline import get_readable_time
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubot.modules.bot.start import ADMINS
 from Ubotlibs.Ubot import Ubot, Devs
 
