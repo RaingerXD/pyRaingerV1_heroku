@@ -2,7 +2,7 @@ from pyrogram.filters import chat
 from . import cli
 from typing import Dict, List, Union
 from datetime import datetime, timedelta
-from .accesdb import *
+from Ubot.core.db.accesdb import *
 import schedule
 import asyncio
 
