@@ -17,7 +17,7 @@ from Ubotlibs.Ubot.helper.utility import get_arg
 from Ubotlibs.Ubot import Ubot
 from Ubot.modules.basic import add_command_help
 from Ubot import cmds
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 
 @Ubot("tr", cmds)
 @check_access
