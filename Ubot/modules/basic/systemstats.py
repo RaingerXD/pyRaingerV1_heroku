@@ -19,7 +19,7 @@ from pyrogram.types import Message
 from Ubot.modules.basic.help import add_command_help
 from Ubotlibs.Ubot import Ubot
 from Ubot import cmds
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 
 async def get_readable_time(seconds: int) -> str: 
     count = 0
