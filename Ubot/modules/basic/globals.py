@@ -10,7 +10,7 @@ from Ubotlibs.Ubot.helper import edit_or_reply
 from Ubotlibs.Ubot.utils.misc import *
 from Ubotlibs.Ubot.helper.PyroHelpers import get_ub_chats
 from Ubot import cmds
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubot.modules.basic import DEVS
 
 
