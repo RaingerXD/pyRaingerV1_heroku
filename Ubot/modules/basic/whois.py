@@ -14,7 +14,7 @@ from pyrogram import Client, filters
 from pyrogram.enums import ChatType
 from pyrogram.types import Message
 from Ubotlibs.Ubot import Ubot
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubotlibs.Ubot.helper.PyroHelpers import ReplyCheck
 from Ubot.modules.basic.profile import extract_user
 from Ubot.modules.basic import add_command_help
