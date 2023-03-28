@@ -14,9 +14,9 @@ from pyrogram import Client, enums, filters
 from pyrogram.types import *
 from Ubot import CMD_HELP, StartTime, app, ids
 from Ubot import cmds
-from Ubotlibs.Ubot.database.activedb import *
-from Ubotlibs.Ubot.database.usersdb import *
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb.activedb import *
+from Ubot.core.db.accesdb.usersdb import *
+from Ubot.core.db.accesdb import *
 from pyrogram.raw.functions import Ping
 from Ubot.modules.bot.inline import get_readable_time
 from Ubot.core.db.accesdb import *
