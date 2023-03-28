@@ -8,6 +8,7 @@
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Ubot | Ram Team
+
 import random
 import time
 import traceback
@@ -26,9 +27,9 @@ from pyrogram.types import *
 from Ubotlibs.Ubot.helper.data import Data
 from Ubotlibs.Ubot.helper.inline import inline_wrapper, paginate_help
 from Ubotlibs import BOT_VER
-from Ubotlibs.Ubot.database.activedb import *
-from Ubotlibs.Ubot.database.usersdb import *
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.activedb import *
+from Ubot.core.db.usersdb import *
+from Ubot.core.db.accesdb import *
 from pyrogram.raw.functions import Ping
 from Ubotlibs.Ubot import Ubot, Devs
 from Ubot import CMD_HELP, StartTime, app, ids, cmds, app
