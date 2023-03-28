@@ -16,7 +16,8 @@ from Ubot.core.db.accesdb import *
 from Ubot import *
 from itertools import count
 from Ubot.modules.basic import *
-from Ubotlibs.Ubot import Ubot, Devs, ADMINS
+from Ubotlibs import *
+from Ubotlibs.Ubot import Ubot, DEVS
 from pyrogram import *
 from platform import python_version as py
 from pyrogram import __version__ as pyro
@@ -30,6 +31,8 @@ def restart():
     os.execvp(sys.executable, [sys.executable, "-m", "Ubot"])
 
 HAPP = None
+
+ADMINS = [5615921474]
 
 load_dotenv()
 
@@ -217,6 +220,7 @@ async def start_(client: Client, message: Message):
     )
     
 """
+
 @app.on_message(filters.command("aktif") & ~filters.via_bot)
 async def activate_user(client, message):
     try:
@@ -234,7 +238,6 @@ async def activate_user(client, message):
     expire_date = now + relativedelta(months=duration)
     await set_expired_date(user_id, expire_date)
     await message.reply(f"User {user_id} telah diaktifkan selama {duration} bulan.")
-"""
 
 @app.on_message(filters.command("cekaktif") & ~filters.via_bot)
 async def check_active(client, message):
@@ -254,9 +257,6 @@ async def check_active(client, message):
         remaining_days = (expired_date - datetime.now()).days
         await message.reply(f"User {user_id} aktif hingga {expired_date.strftime('%d-%m-%Y %H:%M:%S')}. Sisa waktu aktif {remaining_days} hari.")
 
-
-
-
 @app.on_message(filters.group & ~filters.service & ~filters.via_bot)
 async def check_user_expiry(client, message):
     if message.new_chat_members:
@@ -267,7 +267,6 @@ async def check_user_expiry(client, message):
             await client.kick_chat_member(message.chat.id, user_id)
             await rem_expired_date(user_id)
             await app.send_message(SUPPORT, f"User {user_id} telah dihapus karena masa aktifnya habis.")
-
         
 @app.on_message(filters.private & filters.command("restart") & filters.user(ADMINS) & ~filters.via_bot
 )
@@ -285,8 +284,7 @@ async def restart_bot(_, message: Message):
         args = [sys.executable, "-m", "Ubot"]
         execle(sys.executable, *args, environ)
 
-
-@Client.on_message(filters.command("restart", cmds) & filters.me)
+@Client.on_message(filters.command("update", cmds) & filters.me)
 async def restart_bot(_, message: Message):
     try:
         await message.edit(" `Restarting bot...`")
@@ -301,3 +299,150 @@ async def restart_bot(_, message: Message):
         args = [sys.executable, "-m", "Ubot"]
         execle(sys.executable, *args, environ)
         
+@app.on_message(filters.group & ~filters.service)
+async def check_user_expiry(client, message):
+    if message.new_chat_members:
+        user_id = message.new_chat_members[0].id
+        expire_date = get_expired_date(user_id)
+        now = datetime.now()
+        if expire_date is not None and now > expire_date:
+            await client.kick_chat_member(message.chat.id, user_id)
+            await rem_expired_date(user_id)
+            await client.send_message(message.chat.id, f"User {user_id} telah dihapus karena masa aktifnya habis.")
+    
+@app.on_message(
+    filters.private & filters.command("getvar") & filters.user(ADMINS) & ~filters.via_bot
+)
+async def varget_(client, message):
+    usage = "**Usage:**\n/get_var [Var Name]"
+    if len(message.command) != 2:
+        return await message.reply_text(usage)
+    check_var = message.text.split(None, 2)[1]
+    if await is_heroku():
+        if HEROKU_API_KEY == "" and HEROKU_APP_NAME == "":
+            return await message.reply_text(
+                "<b>HEROKU APP DETECTED!</b>\n\nIn order to update your Client, you need to set up the `HEROKU_API_KEY` and `HEROKU_APP_NAME` vars respectively!"
+            )
+        elif HEROKU_API_KEY == "" or HEROKU_APP_NAME == "":
+            return await message.reply_text(
+                "<b>HEROKU APP DETECTED!</b>\n\n<b>Make sure to add both</b> `HEROKU_API_KEY` **and** `HEROKU_APP_NAME` <b>vars correctly in order to be able to update remotely!</b>"
+            )
+        try:
+            Heroku = heroku3.from_key(HEROKU_API_KEY)
+            happ = Heroku.app(HEROKU_APP_NAME)
+        except BaseException:
+            return await message.reply_text(
+                " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku"
+            )
+        heroku_config = happ.config()
+        if check_var in heroku_config:
+            return await message.reply_text(
+                f"**Heroku Config:**\n\n**{check_var}:** `{heroku_config[check_var]}`"
+            )
+        else:
+            return await message.reply_text("No such Var")
+    else:
+        path = dotenv.find_dotenv()
+        if not path:
+            return await message.reply_text(".env not found.")
+        output = dotenv.get_key(path, check_var)
+        if not output:
+            return await message.reply_text("No such Var")
+        else:
+            return await message.reply_text(
+                f".env:\n\n**{check_var}:** `{str(output)}`"
+            )
+            
+@app.on_message(
+    filters.private & filters.command("delvar") & filters.user(ADMINS) & ~filters.via_bot
+)
+async def vardel_(client, message):
+    usage = "**Usage:**\n/delvar [Var Name]"
+    if len(message.command) != 2:
+        return await message.reply_text(usage)
+    check_var = message.text.split(None, 2)[1]
+    if await is_heroku():
+        if HEROKU_API_KEY == "" and HEROKU_APP_NAME == "":
+            return await message.reply_text(
+                "<b>HEROKU APP DETECTED!</b>\n\nIn order to update your Client, you need to set up the `HEROKU_API_KEY` and `HEROKU_APP_NAME` vars respectively!"
+            )
+        elif HEROKU_API_KEY == "" or HEROKU_APP_NAME == "":
+            return await message.reply_text(
+                "<b>HEROKU APP DETECTED!</b>\n\n<b>Make sure to add both</b> `HEROKU_API_KEY` **and** `HEROKU_APP_NAME` <b>vars correctly in order to be able to update remotely!</b>"
+            )
+        try:
+            Heroku = heroku3.from_key(HEROKU_API_KEY)
+            happ = Heroku.app(HEROKU_APP_NAME)
+        except BaseException:
+            return await message.reply_text(
+                " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku"
+            )
+        heroku_config = happ.config()
+        if check_var in heroku_config:
+            await message.reply_text(
+                f"**Heroku Var Deletion:**\n\n`{check_var}` has been deleted successfully."
+            )
+            del heroku_config[check_var]
+        else:
+            return await message.reply_text(f"No such Var")
+    else:
+        path = dotenv.find_dotenv()
+        if not path:
+            return await message.reply_text(".env not found.")
+        output = dotenv.unset_key(path, check_var)
+        if not output[0]:
+            return await message.reply_text("No such Var")
+        else:
+            return await message.reply_text(
+                f".env Var Deletion:\n\n`{check_var}` has been deleted successfully. To restart the bot touch /restart command."
+            )
+
+
+@app.on_message(
+    filters.private & filters.command("setvar") & filters.user(ADMINS) & ~filters.via_bot
+)
+async def setvar(client, message):
+    usage = "**Usage:**\n/setvar [Var Name] [Var Value]"
+    if len(message.command) < 3:
+        return await message.reply_text(usage)
+    to_set = message.text.split(None, 2)[1].strip()
+    value = message.text.split(None, 2)[2].strip()
+    if await is_heroku():
+        if HEROKU_API_KEY == "" and HEROKU_APP_NAME == "":
+            return await message.reply_text(
+                "<b>HEROKU APP DETECTED!</b>\n\nIn order to update your Client, you need to set up the `HEROKU_API_KEY` and `HEROKU_APP_NAME` vars respectively!"
+            )
+        elif HEROKU_API_KEY == "" or HEROKU_APP_NAME == "":
+            return await message.reply_text(
+                "<b>HEROKU APP DETECTED!</b>\n\n<b>Make sure to add both</b> `HEROKU_API_KEY` **and** `HEROKU_APP_NAME` <b>vars correctly in order to be able to update remotely!</b>"
+            )
+        try:
+            Heroku = heroku3.from_key(HEROKU_API_KEY)
+            happ = Heroku.app(HEROKU_APP_NAME)
+        except BaseException:
+            return await message.reply_text(
+                " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku"
+            )
+        heroku_config = happ.config()
+        if to_set in heroku_config:
+            await message.reply_text(
+                f"**Heroku Var Updation:**\n\n`{to_set}` has been updated successfully. Bot will Restart Now."
+            )
+        else:
+            await message.reply_text(
+                f"Added New Var with name `{to_set}`. Bot will Restart Now."
+            )
+        heroku_config[to_set] = value
+    else:
+        path = dotenv.find_dotenv()
+        if not path:
+            return await message.reply_text(".env not found.")
+        output = dotenv.set_key(path, to_set, value)
+        if dotenv.get_key(path, to_set):
+            return await message.reply_text(
+                f"**.env Var Updation:**\n\n`{to_set}`has been updated successfully. To restart the bot touch /restart command."
+            )
+        else:
+            return await message.reply_text(
+                f"**.env Var Updation:**\n\n`{to_set}`has been updated successfully. To restart the bot touch /restart command."
+            )
