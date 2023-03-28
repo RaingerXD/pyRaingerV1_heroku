@@ -47,10 +47,8 @@ MSG = """
 
 
 async def main():
-    load_dotenv()
     await app.start()
-    LOGGER("Ubot").info("Memulai Ubot Pyro..")
-    LOGGER("Ubot").info("Loading Everything.")
+    LOGGER("Ubot").info("Memulai Rainger Userbot Pyro..")
     for all_module in ALL_MODULES:
         importlib.import_module("Ubot.modules" + all_module)
     for bot in bots:
@@ -58,30 +56,17 @@ async def main():
             await bot.start()
             ex = await bot.get_me()
             await join(bot)
-            LOGGER("Ubot").info("Startup Completed")
-            LOGGER("√").info(f"Started as {ex.first_name} | {ex.id} ")
-            await add_user(ex.id)
-            user_active_time = await get_active_time(ex.id)
-            active_time_str = str(user_active_time.days) + " Hari " + str(user_active_time.seconds // 3600) + " Jam"
-            expired_date = await get_expired_date(ex.id)
-            remaining_days = (expired_date - datetime.now()).days
-            msg = f"{ex.first_name} ({ex.id}) - Masa Aktif: {active_time_str}"
+            try:
+            	await app.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, py, pyro))
+            except BaseException as a:
+                LOGGER("✓").warning(f"{a}")
+            LOGGER("✓").info("Startup Completed")
+            LOGGER("✓").info(f"Started as {ex.first_name} | {ex.id} ")
             ids.append(ex.id)
-            await bot.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, pyro, py(), active_time_str, remaining_days, CMD_HNDLR))
-            user = len( await get_active_users())
         except Exception as e:
             LOGGER("X").info(f"{e}")
-            if "TELEGRAM" in str(e):
-                for i in range(1, 201):
-                    if os.getenv(f"SESSION{i}") == str(e):
-                        os.environ.pop(f"SESSION{i}")
-                        LOGGER("Ubot").info(f"Removed SESSION{i} from .env file due to error.")
-                        await app.send_message(SUPPORT, f"Removed SESSION{i} from .env file due to error.")
-                        break
     await idle()
-    for ex_id in ids:
-        await remove_user(ex_id)
-
+    await aiosession.close()
 
               
 if __name__ == "__main__":
