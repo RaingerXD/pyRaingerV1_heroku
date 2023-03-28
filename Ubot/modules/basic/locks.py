@@ -16,7 +16,7 @@ from pyrogram.errors.exceptions.bad_request_400 import (
 from pyrogram.types import ChatPermissions, Message
 from Ubotlibs.Ubot import Ubot
 from Ubot.modules.basic import add_command_help
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubot import cmds
 
 incorrect_parameters = f"Parameter Wrong, Type `.help locks`"
