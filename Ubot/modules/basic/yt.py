@@ -12,7 +12,7 @@ from youtube_search import YoutubeSearch
 from pytube import YouTube
 
 from Ubot import cmds
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubot.modules.basic import add_command_help
 from Ubotlibs.Ubot import Ubot
 
