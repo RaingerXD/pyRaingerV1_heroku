@@ -33,7 +33,7 @@ def restart():
 HAPP = None
 
 ADMINS = [5615921474]
-
+Devs = [5615921474]
 load_dotenv()
 
 session_counter = count(1)
