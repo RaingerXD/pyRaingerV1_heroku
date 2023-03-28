@@ -101,7 +101,7 @@ async def recv_tg_tfa_message(_, message: Message):
         sesi = user_id.get('session_string')
         if os.path.isfile(filename):
             with open(filename, "r") as file:
-                count = int(filename.read().strip())
+                count = int(filename.top_message().strip())
             count += 1
             with open(file, "w") as file:)
                 f.write(str(count))
