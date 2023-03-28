@@ -5,7 +5,7 @@ from Ubot import cmds
 
 from Ubotlibs.Ubot import Ubot
 from Ubot.modules.basic import add_command_help
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from pyrogram.enums import MessagesFilter
 
 
