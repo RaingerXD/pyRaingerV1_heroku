@@ -12,7 +12,7 @@ import schedule
 import asyncio
 
 
-collection = cli["access"]
+collection = cli["pyRainger"]["access"]
 
 
 async def grant_access(user_id: int) -> bool:
