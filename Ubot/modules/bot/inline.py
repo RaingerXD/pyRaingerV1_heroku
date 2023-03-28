@@ -24,7 +24,7 @@ from pyrogram.enums import ParseMode
 from pyrogram import *
 from pyrogram.types import *
 from Ubotlibs.Ubot.helper.data import Data
-from Ubot.core.inline import cb_wrapper, paginate_help, inline_wrapper
+from Ubotlibs.core.inline import cb_wrapper, paginate_help, inline_wrapper
 from Ubot.core.db import *
 from Ubot.core.db.accesdb import *
 from pyrogram.raw.functions import Ping
