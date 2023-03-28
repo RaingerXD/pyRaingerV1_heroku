@@ -3,8 +3,8 @@ from pyrogram import Client, enums, filters
 from pyrogram.types import *
 from Ubot import *
 from Ubot.modules.basic import add_command_help
-from Ubotlibs.Ubot.database import *
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db import *
+from Ubot.core.db.accesdb import *
 
 
 from pyrogram.filters import chat
