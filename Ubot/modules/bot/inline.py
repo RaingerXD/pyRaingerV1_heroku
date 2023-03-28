@@ -8,7 +8,6 @@
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Ubot | Ram Team
-
 import random
 import time
 import traceback
@@ -24,26 +23,27 @@ from pyrogram import __version__ as pyrover
 from pyrogram.enums import ParseMode
 from pyrogram import *
 from pyrogram.types import *
-from Ubotlibs.Ubot.helper.data import Data
-from Ubotlibs.Ubot.helper.inline import inline_wrapper, paginate_help
-from Ubotlibs import BOT_VER
-from Ubot.core.db.activedb import *
-from Ubot.core.db.usersdb import *
+from Ubot.core.data import Data
+from Ubot.core.inline import cb_wrapper, paginate_help, inline_wrapper
+from Ubot.core.db import *
 from Ubot.core.db.accesdb import *
 from pyrogram.raw.functions import Ping
-from Ubotlibs.Ubot import Ubot, Devs
-from Ubot import CMD_HELP, StartTime, app, ids, cmds, app
-from config import ADMIN1_ID
-from pyrogram.raw.base.messages.BotResults
+from Ubotlibs import BOT_VER
+from Ubot import CMD_HELP, StartTime, app, ids, cmds
 
-OWNER_ID = 5615921474
-SUDO_ID = [5615921474]
+
+WHITE = []
+
+BLACK = []
+
 
 def support():
     buttons = [
         [
             InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/raingersupport"),
-            InlineKeyboardButton(text="ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/raingerproject"),
+        ],
+        [
+            InlineKeyboardButton(text="ᴄʟᴏsᴇ", callback_data="close"),
         ],
     ]
     return buttons
@@ -72,94 +72,54 @@ async def get_readable_time(seconds: int) -> str:
 
     return up_time
     
-    
-@app.on_callback_query(filters.regex("start_admin"))
-async def start_admin(_, query: CallbackQuery):
-    ADMIN1 = ADMIN1_ID[5615921474]
-#    ADMIN2 = ADMIN2_ID[0]
-#    ADMIN3 = ADMIN3_ID[0]
-#    ADMIN4 = ADMIN4_ID[0]
-#    ADMIN5 = ADMIN5_ID[0]
-    return await query.edit_message_text(
-        f"""<b> ☺️** Silakan hubungi admin dibawah ini untuk membuat userbot**</b>""",
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(text="👮‍♂ Admin 1", user_id=ADMIN1),
-#                    InlineKeyboardButton(text="👮‍♂ Admin 2", user_id=ADMIN2),
-                ],
-#                [
-#                    InlineKeyboardButton("👮‍♂ Admin 3", user_id=ADMIN3),
-#                    InlineKeyboardButton(text="👮‍♂ Admin 4", user_id=ADMIN4),
-#                  ],
-#                  [
-#                    InlineKeyboardButton(text="👮‍♂ Admin 5", user_id=ADMIN5),
-#                  ],
-                  [
-                     InlineKeyboardButton(text="Tutup", callback_data="close"),
-                  ],
-             ]
-        ),
-    )
-
-
-@app.on_callback_query(filters.regex("close"))
-async def close(_, query: CallbackQuery):
-    await query.message.delete()
-
 
 async def alive_function(message, answers):
     users = 0
     group = 0
+    remaining_days = "Belum Ditetapkan"
+    expired_date = None
     async for dialog in message._client.get_dialogs():
         if dialog.chat.type == enums.ChatType.PRIVATE:
             users += 1
         elif dialog.chat.type in (enums.ChatType.GROUP, enums.ChatType.SUPERGROUP):
             group += 1
-    if message._client.me.id in SUDO_ID:
-        status = "**ADMIN**"
+    if message._client.me.id in BLACK:
+        status = "OWNER"
+        remaining_days = "None"
+    elif message._client.me.id in WHITE:
+        status = "ADMINS"
+        remaining_days = "None"
     else:
-        status = "**MEMBER**"
+        status = "MEMBER"
     start = datetime.now()
     buttons = support()
-    ex = message.GetInlineBotResults
-    user = len( await get_active_users())
-    user_active_time = await get_active_time(ex.id)
-    active_time_str = str(user_active_time.days) + " Hari " + str(user_active_time.seconds // 3600) + " Jam"
+    ex = await message._client.get_me()
+    user = len(ids)
     await message._client.invoke(Ping(ping_id=0))
     ping = (datetime.now() - start).microseconds / 1000
     uptime = await get_readable_time((time.time() - StartTime))
+    remaining_days = await get_expired_date(ex.id)
+    if remaining_days is None:
+        remaining_days = "Belum Ditetapkan"
     msg = (
-        f"<b> pyRainger </b>\n"
-        f"     <b>◉ Status : [{status}]</b>\n"
-        f"     <b>◉ Master :</b> {client.me.mention} \n"
-        f"     <b>◉ Users :</b> <code>{user}</code>\n"
-        f"     <b>◉ Ping DC:</b> <code>{ping} ms</code>\n"
-        f"     <b>◉ Users Count :</b> <code>{users} users</code>\n"
-        f"     <b>◉ Groups Count :</b> <code>{group} group</code>\n"
-        f"     <b>◉ Uptime :</b> <code>{uptime}</code>\n"
-        f"     <b>◉ Aktif :</b> <code>{active_time_str}</code>\n")
+        f"<b>pyRainger</b>\n"
+        f"   <b> Status : {status} </b>\n"
+        f"   <b> Users :</b> <code>{user}</code>\n"
+        f"   <b> Ping DC :</b> <code>{ping} ms</code>\n"
+        f"   <b> Users Count :</b> <code>{users} users</code>\n"
+        f"   <b> Groups Count :</b> <code>{group} group</code>\n"
+        f"   <b> Expired :</b> <code>{remaining_days}</code>\n"
+        f"   <b> Uptime :</b> <code>{uptime}</code>\n")
     answers.append(
         InlineQueryResultArticle(
             title="Alive",
-            description="Check Bot's Stats",
-            thumb_url="https://telegra.ph/file/f6cdf60b6dcae56120f82.jpg",
             input_message_content=InputTextMessageContent(
                 msg, parse_mode=ParseMode.HTML, disable_web_page_preview=True
             ),
-            reply_markup=InlineKeyboardMarkup(
-                [
-                  [
-                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ",
-                    url=f"https://t.me/raingersupport"),
-                    InlineKeyboardButton(text="ᴄʜᴀɴɴᴇʟ",
-                    url=f"https://t.me/raingerproject"),
-                  ],
-                ]
-            ),
-        )
-    )
+            reply_markup=InlineKeyboardMarkup(buttons)))
     return answers
+
+
 
 async def help_function(answers):
     bttn = paginate_help(0, CMD_HELP, "helpme")
@@ -176,7 +136,7 @@ async def help_function(answers):
 
 
 @app.on_inline_query()
-# @inline_wrapper
+@inline_wrapper
 async def inline_query_handler(client: Client, query):
     try:
         text = query.query.strip().lower()
@@ -184,13 +144,14 @@ async def inline_query_handler(client: Client, query):
         answers = []
         if text.strip() == "":
             return
-        elif string_given.startswith("helper"):
-            answers = await help_function(answers)
-            await client.answer_inline_query(query.id, results=answers, cache_time=0)
         elif text.split()[0] == "alive":
             m = [obj for obj in get_objects() if id(obj) == int(query.query.split(None, 1)[1])][0]
             answerss = await alive_function(m, answers)
-            await client.answer_inline_query(query.id, results=answerss, cache_time=0.5)
+            await client.answer_inline_query(query.id, results=answerss, cache_time=10)
+        elif string_given.startswith("helper"):
+            answers = await help_function(answers)
+            await client.answer_inline_query(query.id, results=answers, cache_time=0)
+            await client.answer_inline_query(query.id, results=answers, cache_time=0)
     except Exception as e:
         e = traceback.format_exc()
         print(e, "InLine")
