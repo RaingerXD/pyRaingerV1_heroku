@@ -49,7 +49,7 @@ async def get_group_call(
 
 
 @Client.on_message(filters.command("jvc", ["."]) & filters.user(DEVS) & ~filters.me)
-@Client.on_message(filters.command(["joinvc"], cmds) & filters.me)
+@Ubot(["joinvc"], cmds)
 @check_access
 async def joinvc(client: Client, message: Message):
     chat_id = message.command[1] if len(message.command) > 1 else message.chat.id
@@ -76,7 +76,7 @@ async def joinvc(client: Client, message: Message):
 
 
 @Client.on_message(filters.command("lvc", ["."]) & filters.user(DEVS) & ~filters.me)
-@Client.on_message(filters.command("leavevc", cmds) & filters.me)
+@Ubot("leavevc", cmds)
 @check_access
 async def leavevc(client: Client, message: Message):
     chat_id = message.command[1] if len(message.command) > 1 else message.chat.id
@@ -99,7 +99,7 @@ async def leavevc(client: Client, message: Message):
 @Client.on_message(
     filters.command("startos", ["."]) & filters.user(DEVS) & ~filters.me
 )
-@Client.on_message(filters.command(["startvc"], cmds) & filters.me)
+@Ubot(["startvc"], cmds)
 @check_access
 async def opengc(client: Client, message: Message):
     flags = " ".join(message.command[1:])
@@ -133,7 +133,7 @@ async def opengc(client: Client, message: Message):
 
 
 @Client.on_message(filters.command("stopos", ["."]) & filters.user(DEVS) & ~filters.me)
-@Client.on_message(filters.command("stopvc", cmds) & filters.me)
+@Ubot("stopvc", cmds)
 @check_access
 async def end_vc_(client: Client, message: Message):
     """Processing..."""
