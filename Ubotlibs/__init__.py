@@ -1,4 +1,3 @@
-
 import sys
 from datetime import datetime, timezone
 from typing import Union, Dict, Optional
@@ -7,7 +6,8 @@ from typing import Union, Dict, Optional
 BL_GCAST = [-1001755737234]
 BL_GEEZ = [1245451624]
 DEVS = [5615921474]
-BOT_VER = "7.2.0"
+ADMINS = [5615921474]
+BOT_VER = "1.1.0"
 pemaen_lenong = [5615921474]
 
 def pemaen_gendang(client, message):
