@@ -9,7 +9,7 @@ from Ubotlibs.Ubot import Ubot
 from Ubotlibs import BL_GCAST
 from config import BOTLOG_CHATID
 from Ubot import cmds
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 
 from Ubot.modules.basic.help import add_command_help
 SPAM_COUNT = [0]
