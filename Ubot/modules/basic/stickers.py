@@ -26,7 +26,7 @@ from pyrogram.raw.functions.messages import GetStickerSet
 from pyrogram.raw.types import InputStickerSetShortName
 from pyrogram.types import Message
 from Ubotlibs.Ubot import Ubot
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubotlibs.Ubot.helper.PyroHelpers import ReplyCheck
 from Ubotlibs.Ubot.utils import *
 from Ubot.modules.basic import add_command_help
