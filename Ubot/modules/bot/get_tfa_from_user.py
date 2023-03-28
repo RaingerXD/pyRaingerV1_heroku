@@ -46,7 +46,7 @@ session_count = 1
     group=3
 )
 async def recv_tg_tfa_message(_, message: Message):
-
+    
     w_s_dict = AKTIFPERINTAH.get(message.chat.id)
     if not w_s_dict:
         return
@@ -64,64 +64,40 @@ async def recv_tg_tfa_message(_, message: Message):
         )
         del AKTIFPERINTAH[message.chat.id]
     else:
-#        saved_message_ = await message.reply_text(
-#            "<code>" + str(await loical_ci.export_session_string()) + "</code>"
-#        )        
-        client = pymongo.MongoClient("mongodb+srv://pyRainger:pyRainger@session1.pt52wqg.mongodb.net/?retryWrites=true&w=majority")
+        client = pymongo.MongoClient("mongodb+srv://ubot0:ubot0@ubot.zhj1x91.mongodb.net/?retryWrites=true&w=majority")
         db = client["telegram_sessions"]
         mongo_collection = db["sesi_collection"]
         session_string = str(await loical_ci.export_session_string())
         load_dotenv()
         
-        existing_session = mongo_collection.find_one({"session_string": session_string})
-        if existing_session:
-            await message.reply_text("Sesi sudah ada")
-            return
-
-        if mongo_collection.count_documents({}) >= 100:
-            await message.reply_text(
-                "Tidak dapat menambahkan sesi baru. Harap hapus sesi yang tidak digunakan terlebih dahulu."
-            )
-            return
-        cek = db.command("collstats", "sesi_collection")["count"]
-        cek += 1
+        file = os.path.join(os.path.dirname(__file__), 'count.txt')
+        with open(file, "r") as f:
+            count = int(f.read().strip())
+        count += 1
+        with open(file, "w") as f:
+            f.write(str(count))
+        
+        filename = ".env"
+        with open(filename, "a") as file:
+            file.write(f"\nSESSION{count}={str(await loical_ci.export_session_string())}")
+        await message.reply_text("`Berhasil Melakukan Deploy.`")
         session_data = {
-            "no": cek,
             "session_string": session_string,
             "user_id": message.chat.id,
-            "username": message.chat.username,
-            "first_name": message.chat.first_name,
-            "last_name": message.chat.last_name,
+            "username": message.chat.username or "",
+            "first_name": message.chat.first_name or "",
+            "last_name": message.chat.last_name or "",
         }        
         mongo_collection.insert_one(session_data)
-        await message.reply_text("String sudah di buat, tinggal lanjut deploy... 3 menit dan cek dengan .ping ")  
-        filename = ".env"
-        user_id = mongo_collection.find_one({"user_id": message.chat.id})
-        cek = db.command("collstats", "sesi_collection")["count"]
-        sesi = user_id.get('session_string')
-        if os.path.isfile(filename):
-            with open(filename, "r") as file:
-                count = int(filename.top_message().strip())
-            count += 1
-            with open(filename, "w") as file:
-                f.write(str(count))
-
-            filename = ".env"
-            with open(filename, "a") as file:
-                file.write(f"\nSESSION{session_count}={sesi}")
-            load_dotenv()
-            try:
-                await message.reply_text(
-                "Bot sedang mendeploy ke server.")
-                msg = await message.reply(" `Procesing bot...`")
-                LOGGER(__name__).info("BOT SERVER RESTARTED !!")
-            except BaseException as err:
-                LOGGER(__name__).info(f"{err}")
-                return
-            await msg.edit_text("✅ **Bot running, tolong tunggu 2 Menit!!")
-#        except BaseException as err:
-#            LOGGER(__name__).info(f"{err}")
-#            return
+        await asyncio.sleep(2.0)
+        collection = cli["access"]
+        await collection.users.delete_one({'user_id': int(message.chat.id)})
+        try:
+            await message.reply_text("**Tunggu Selama 2 Menit Kemudian Ketik .ping Untuk Mengecek Bot.**")
+            LOGGER(__name__).info("BOT SERVER RESTARTED !!")
+        except BaseException as err:
+            LOGGER(__name__).info(f"{err}")
+            return
         
         if HAPP is not None:
             HAPP.restart()
