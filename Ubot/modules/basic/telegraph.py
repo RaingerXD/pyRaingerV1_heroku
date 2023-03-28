@@ -8,6 +8,7 @@
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Ubot | Ram Team
+
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from telegraph import Telegraph, exceptions, upload_file
@@ -15,7 +16,7 @@ import os
 from Ubotlibs.Ubot import Ubot
 from Ubot.modules.basic import add_command_help
 from Ubot import cmds
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 
 telegraph = Telegraph()
 r = telegraph.create_account(short_name="telegram")
