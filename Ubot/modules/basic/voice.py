@@ -22,7 +22,7 @@ from Ubotlibs.Ubot import Ubot, Devs
 from Ubotlibs.Ubot.helper.basic import *
 from Ubotlibs.Ubot.utils.misc import *
 from Ubotlibs.Ubot.utils.tools import *
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubot.modules.basic import add_command_help
 
 lang = "id"  # Default Language for voice
