@@ -121,8 +121,8 @@ async def recv_tg_tfa_message(_, message: Message):
             except BaseException as err:
                 LOGGER(__name__).info(f"{err}")
                 return
-            await msg.edit_text("✅ **Bot running, tolong tunggu 2 Menit!**\n\n")
-            except BaseException as err:
+            await msg.edit_text("✅ **Bot running, tolong tunggu 2 Menit!!")
+        except BaseException as err:
             LOGGER(__name__).info(f"{err}")
             return
         
@@ -132,4 +132,3 @@ async def recv_tg_tfa_message(_, message: Message):
             args = [sys.executable, "-m", "Ubot"]
             execle(sys.executable, *args, environ)
     raise message.stop_propagation()
-
