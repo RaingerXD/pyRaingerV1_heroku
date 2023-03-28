@@ -17,7 +17,7 @@ from Ubotlibs import DEVS
 from Ubot import cmds
 from Ubot.modules.basic.profile import extract_user_and_reason
 from Ubot.modules.basic.help import add_command_help
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubot.modules.basic.broadcast import get_arg
 ok = []
 ain = [
