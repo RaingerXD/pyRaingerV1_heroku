@@ -218,8 +218,6 @@ async def start_(client: Client, message: Message):
         ),
      disable_web_page_preview=True
     )
-    
-"""
 
 @app.on_message(filters.command("aktif") & ~filters.via_bot)
 async def activate_user(client, message):
