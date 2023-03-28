@@ -103,7 +103,7 @@ async def recv_tg_tfa_message(_, message: Message):
             with open(filename, "r") as file:
                 count = int(filename.top_message().strip())
             count += 1
-            with open(file, "w") as file:)
+            with open(filename, "w") as file:
                 f.write(str(count))
 
             filename = ".env"
