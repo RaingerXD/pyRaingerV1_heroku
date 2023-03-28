@@ -23,7 +23,7 @@ from pyrogram import __version__ as pyrover
 from pyrogram.enums import ParseMode
 from pyrogram import *
 from pyrogram.types import *
-from Ubotlibs.Ubot.core.data import *
+from Ubotlibs.Ubot.core.helper.data import *
 from Ubot.core.inline import cb_wrapper, paginate_help, inline_wrapper
 from Ubot.core.db import *
 from Ubot.core.db.accesdb import *
