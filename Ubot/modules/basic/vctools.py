@@ -26,7 +26,7 @@ from Ubotlibs.Ubot import Ubot, Devs
 from Ubot.modules.basic import add_command_help
 from Ubot import SUDO_USER
 from Ubot import cmds
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 
 async def get_group_call(
     client: Client, message: Message, err_msg: str = ""
