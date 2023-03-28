@@ -15,7 +15,7 @@ from pyrogram.errors import FloodWait
 from Ubotlibs import DEVS
 from Ubotlibs.Ubot import Ubot, Devs
 from Ubot.modules.basic import add_command_help
-from Ubotlibs.Ubot.database.accesdb import *
+from Ubot.core.db.accesdb import *
 from Ubot import cmds
 
 @Ubot("del", cmds)
