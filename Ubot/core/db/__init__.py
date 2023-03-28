@@ -1,7 +1,7 @@
-from Ubot.core.db import *
+from Ubotlibs.Ubot.Db import cli
 from config import MONGO_URL
-from Ubot.core.db import usersdb
-from Ubot.core.db import accesdb
+from .usersdb import *
+from .accesdb import *
 
 from motor.motor_asyncio import AsyncIOMotorClient
 
