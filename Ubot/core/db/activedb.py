@@ -6,7 +6,7 @@ from Ubot.core.db.accesdb import *
 import schedule
 import asyncio
 
-collection = cli["pyRainger"]["active"]
+collection = cli["active"]
 
 
 
