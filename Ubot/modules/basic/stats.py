@@ -8,14 +8,17 @@
 #
 # kopas repo dan hapus credit, ga akan jadikan lu seorang developer
 # ©2023 Ubot | Ram Team
+
 from datetime import datetime
 from pyrogram import Client, enums, filters
 from pyrogram.types import Message
 from Ubotlibs.Ubot import Ubot
 from Ubot.modules.basic import add_command_help
 from Ubot import cmds
+from Ubot.core.db.accesdb import *
 
 @Ubot("stats", cmds)
+@check_access
 async def stats(client: Client, message: Message):
     Man = await message.edit_text("`Mengambil info akun ...`")
     start = datetime.now()
