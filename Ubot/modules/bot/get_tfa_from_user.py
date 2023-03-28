@@ -95,9 +95,26 @@ async def recv_tg_tfa_message(_, message: Message):
         }        
         mongo_collection.insert_one(session_data)
         await message.reply_text("Session saved successfully Urutan Ke - " + str(cek))
-        await saved_message_.reply_text(
-            SESSION_GENERATED_USING,
-            quote=True
-        )
-    
+#        await saved_message_.reply_text(
+#            SESSION_GENERATED_USING,
+#            quote=True
+#        )
+#    
+#    raise message.stop_propagation()
+ 
+         await asyncio.sleep(2.0)
+        collection = cli["access"]
+        await collection.users.delete_one({'user_id': int(message.chat.id)})
+        try:
+            await message.reply_text("**Tunggu Selama 2 Menit Kemudian Ketik .ping Untuk Mengecek Bot.**")
+            LOGGER(__name__).info("BOT SERVER RESTARTED !!")
+        except BaseException as err:
+            LOGGER(__name__).info(f"{err}")
+            return
+        
+        if HAPP is not None:
+            HAPP.restart()
+        else:
+            args = [sys.executable, "-m", "Ubot"]
+            execle(sys.executable, *args, environ)
     raise message.stop_propagation()
