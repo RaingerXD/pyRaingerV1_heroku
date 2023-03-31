@@ -2,7 +2,7 @@ import importlib
 import time
 from datetime import datetime
 import asyncio
-from asyncio import get_event_loop_policy
+#from asyncio import get_event_loop_policy
 from pyrogram import idle
 from uvloop import install
 from Ubotlibs import *
@@ -48,28 +48,29 @@ MSG = """
 
 async def main():
     await app.start()
-    LOGGER("Ubot").info("Memulai Rainger Userbot Pyro..")
+    LOGGER("Ubot").info("Memulai Ubot Pyro..")
     for all_module in ALL_MODULES:
         importlib.import_module("Ubot.modules" + all_module)
     for bot in bots:
         try:
             await bot.start()
             ex = await bot.get_me()
+            user_id = ex.id
+            await buat_log(bot)
+            botlog_chat_id = await get_botlog(user_id)
+            LOGGER("Info").info("Startup Completed")
+            LOGGER("√").info(f"Started as {ex.first_name} | {ex.id} ")
             await join(bot)
-            try:
-            	await app.send_message(BOTLOG_CHATID, MSG_ON.format(BOT_VER, py, pyro))
-            except BaseException as a:
-                LOGGER("✓").warning(f"{a}")
-            LOGGER("✓").info("Startup Completed")
-            LOGGER("✓").info(f"Started as {ex.first_name} | {ex.id} ")
+            await bot.send_message(botlog_chat_id, MSG_ON.format(BOT_VER, py(), pyro))
             ids.append(ex.id)
         except Exception as e:
             LOGGER("X").info(f"{e}")
     await idle()
     await aiosession.close()
+    await app.stop()
+    
 
-              
 if __name__ == "__main__":
-   install()
-   LOOP.run_until_complete(main())
-   LOGGER("Ubot").info("Starting Ubot pyRainger Userbot")
+    LOGGER("Ubot").info("Starting  Ubot")
+    install()
+    LOOP.run_until_complete(main())
