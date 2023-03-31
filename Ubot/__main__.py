@@ -21,21 +21,21 @@ from dotenv import load_dotenv
 
 MSG_BOT = """
 ╼┅━━━━━━━━━━╍━━━━━━━━━━┅╾
-◉ **Alive
-◉ **Phython**: `{}`
-◉ **Pyrogram**: `{}`
-◉ **Users**: `{}`
+• **Alive
+• **Phython**: `{}`
+• **Pyrogram**: `{}`
+• **Users**: `{}`
 ╼┅━━━━━━━━━━╍━━━━━━━━━━┅╾
 """
 
 MSG_ON = """
 **pyRainger Actived ✅**
 ╼┅━━━━━━━━━━╍━━━━━━━━━━┅╾
-◉ **Versi** : `{}`
-◉ **Phython** : `{}`
-◉ **Pyrogram** : `{}`
-◉ **Masa Aktif** : `{}`
-◉ **Akan Berakhir**: `{}`
+• **Versi** : `{}`
+• **Phython** : `{}`
+• **Pyrogram** : `{}`
+• **Masa Aktif** : `{}`
+• **Akan Berakhir**: `{}`
 **Ketik** `{}alive` **untuk Mengecheck Bot**
 ╼┅━━━━━━━━━━╍━━━━━━━━━━┅╾
 """
@@ -72,4 +72,4 @@ async def main():
 if __name__ == "__main__":
    install()
    LOOP.run_until_complete(main())
-   LOGGER("Info").info("Starting Ubot pyRainger Userbot")
+   LOGGER("Ubot").info("Starting Ubot pyRainger Userbot")
